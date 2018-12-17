@@ -1,0 +1,16 @@
+#filename: docker-install.yml
+#This file is used to install docker in ubuntu system
+
+- name: docker-install.yml
+  hosts: ubuntu_server
+  tasks: 
+    - name: Installing the docker
+      apt:
+       name: docker.io
+       update_cache: yes
+       state: present
+    - name: Installing docker python library
+      apt:
+       name: python-docker
+       state: present
+       update_cache: no
