@@ -1,0 +1,35 @@
+#filename: docker-install-ubuntu-digitalocean.yml
+#This file will install docker using the instructions follows by digital ocean
+-
+  name: docker-install-ubuntu-digitalocean.yml
+  hosts: localhost
+  become: yes
+  tasks:
+      
+      - name: Adding the GPG Key for docker installation
+        apt_key: 
+          url: https://download.docker.com/linux/ubuntu/gpg
+          state: present
+
+      - name: Adding the Docker repo to ubuntu
+        apt_repository: 
+          repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
+          state: present
+          update_cache: yes
+          validate_certs: no
+        
+
+#      - name: Updating The system
+#        apt: 
+#          update_cache: yes
+#          allow_unauthenticated: yes
+      
+      - name: install the docker
+        apt:
+          name: docker-ce
+          state: present
+
+      - name: Restarting the docker service
+        service:
+          name: docker
+          state: restarted  

@@ -1,0 +1,21 @@
+#filename: postgre-install.yml
+#this playbook will install postgre-sql on ubuntu
+- name: postgre-install.yml
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Update the Ubuntu Repository
+      apt:
+        update_cache: yes
+        allow_unauthenticated: yes
+
+    - 
+      name: Installing the postgre-sql on Ubuntu
+      apt:
+        name: postgresql
+        state: present
+
+    - name: contrib package that adds some additional utilities and functionality
+      apt:
+        name: postgresql-contrib
+        state: present

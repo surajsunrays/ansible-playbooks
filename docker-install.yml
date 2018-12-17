@@ -1,0 +1,27 @@
+#filename: docker-install.yml
+#This file will install docker on ubuntu based systems
+- name: docker-install.yml
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Adding the Docker repo to ubuntu
+      apt_repository: 
+        repo: 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+        state: present
+
+    - name: Installing the docker and its dependencies 
+      apt:
+        allow_unauthenticated: yes
+        update_cache: yes
+        name: docker-engine
+        state: present
+    -
+      name: Check the docker Installation
+      shell: docker version >> /tmp/dockerlog.txt
+      args:
+        chdir: /tmp
+        creates: dockerlog.txt
+    - name: Checking out the service of docker
+      service: 
+        name: docker
+        state: restarted

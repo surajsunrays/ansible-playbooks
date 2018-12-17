@@ -1,0 +1,9 @@
+#filename : pingtest.yml
+#This playbook is used to check the connection between the hosts
+-
+  name: pingtest.yml
+  hosts: localhost
+  tasks: 
+    -
+      name: ping test
+      ping: 

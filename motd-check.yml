@@ -1,0 +1,23 @@
+#filename : motd-check.yml
+#This file is used to check the motd in System
+-
+  name: motd-check.yml
+  hosts: localhost
+  tasks:
+    - 
+      name: check the motd in System
+      command: cat /etc/ucf.conf
+      register: mymotd
+    -
+      name: Check the commands with args
+      command: 
+      args:
+        argv:
+          - echo
+          - testing
+    -
+      name: Check the shell execution in ansible yml
+      shell: touch file1 file2
+      args:
+        chdir: /tmp
+        warn: False

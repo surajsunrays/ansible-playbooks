@@ -1,0 +1,26 @@
+#filename: docker-compose-install.yml
+#This file will install docker on ubuntu based systems
+- name: docker-compose-install.yml
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Install python pip to install docker-compose
+      apt:
+        name: python-pip
+        state: present
+
+   # - name: Updating systems
+   #   apt:
+   #     update_cache: yes
+  #      allow_unauthenticated: yes
+
+    - name: Installing docker-compose using pip
+      pip:
+        name: docker-compose
+        state: present
+
+    - name: Checking docker-compose installation in Log
+      shell: docker-compose --version >> /tmp/docker-compose-log.txt
+      args:
+        chdir: /tmp
+        creates: docker-compose-log.txt

@@ -1,0 +1,7 @@
+#filename nginx-install.yml
+#This file is used to install nginx 
+name: nginx-install.yml
+hosts: localhost
+tasks:
+  - name: install nginx on ubuntu
+    command: apt install nginx 
